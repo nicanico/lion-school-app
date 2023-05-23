@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Lion School</string>
+    <string name="title_school">Lion School</string>
+    <string name="description_school">Seja bem vindo a maior escola do Brasil com diversos cursos em areas de tecnologia</string>
+    <string name="title_card_school_institution">Instituição Reconhecida</string>
+    <string name="description_card_school_institution">Com equipamentos de ultima geração.</string>
+    <string name="title_card_school_technology">500+ Núcleos de Tecnolocia</string>
+    <string name="description_card_school_technology">Todos espalhados pelo Brasil</string>
+    <string name="button_start_school">Comece a estudar!</string>
+    <string name="title_activity_home">HomeActivity</string>
 </resources>
