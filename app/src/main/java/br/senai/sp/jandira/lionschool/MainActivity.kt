@@ -1,5 +1,7 @@
 package br.senai.sp.jandira.lionschool
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,6 +47,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun HomeLionSchool() {
+
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -107,7 +113,7 @@ fun HomeLionSchool() {
 
         Button(
             onClick = {
-                   openHome()
+                openHome(context)
             },
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(255, 194, 62)),
             shape = RoundedCornerShape(25.dp)
@@ -163,11 +169,14 @@ fun HomeLionSchool() {
         }
 
     }
-}
 
-fun openHome(){
 
 }
+fun openHome( context: Context){
+    val openHome = Intent(context, HomeActivity::class.java)
+    context.startActivity(openHome)
+}
+
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun DefaultPreview() {

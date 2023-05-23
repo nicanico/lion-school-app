@@ -3,7 +3,9 @@ package br.senai.sp.jandira.lionschool
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -31,7 +33,11 @@ class HomeActivity : ComponentActivity() {
 
 @Composable
 fun HomeShcool() {
-
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Text(text = "AaAAAAAAAAAAAA")
+    }
 }
 
 @Preview(showBackground = true)
