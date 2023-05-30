@@ -172,7 +172,7 @@ fun HomeLionSchool() {
 
 
 }
-fun openHome( context: Context){
+fun openHome(context: Context){
     val openHome = Intent(context, HomeActivity::class.java)
     context.startActivity(openHome)
 }

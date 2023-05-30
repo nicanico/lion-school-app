@@ -8,4 +8,14 @@
     <string name="description_card_school_technology">Todos espalhados pelo Brasil</string>
     <string name="button_start_school">Comece a estudar!</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="input_search_label">Pesquisar por Curso...</string>
+    <string name="home_welcome">Bem vindo!</string>
+    <string name="home_description">Essa é a area home, aproveite e veja sobre nosso cursos.</string>
+    <string name="home_courses">Cursos</string>
+    <string name="title_activity_students">StudentsActivity</string>
+    <string name="charge_courses">Carga Horaria: </string>
+    <string name="hours_courses"> Horas</string>
+
+
+
 </resources>

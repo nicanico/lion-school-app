@@ -1,18 +1,36 @@
 package br.senai.sp.jandira.lionschool
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import br.senai.sp.jandira.lionschool.model.CoursesList
+import br.senai.sp.jandira.lionschool.service.RetrofitFactoryCourses
 import br.senai.sp.jandira.lionschool.ui.theme.LionSchoolTheme
+import coil.compose.AsyncImage
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +51,184 @@ class HomeActivity : ComponentActivity() {
 
 @Composable
 fun HomeShcool() {
+
+    var searchState by remember {
+        mutableStateOf("")
+    }
+
+    var listCourse by remember {
+        mutableStateOf(listOf<br.senai.sp.jandira.lionschool.model.Course>())
+    }
+
+    var siglaDoCurso by remember {
+        mutableStateOf("")
+    }
+
+    val context = LocalContext.current
+
+    var call = RetrofitFactoryCourses().getLionSchoolService().getCursos()
+
+    call.enqueue(object : Callback<CoursesList> {
+        override fun onResponse(
+            call: Call<CoursesList>,
+            response: Response<CoursesList>
+        ) {
+            listCourse = response.body()!!.curso
+            Log.i("ds2t", "onResponse: $listCourse")
+
+        }
+
+        override fun onFailure(call: Call<CoursesList>, t: Throwable) {
+
+        }
+    })
+
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 27.dp),
+        // horizontalAlignment = Alignment.CenterHorizontally
+
     ) {
-        Text(text = "AaAAAAAAAAAAAA")
+        Row() {
+            OutlinedTextField(value = searchState, onValueChange = {
+                searchState = it
+                Log.i("ds2t", "onResponse: $it")
+            }, modifier = Modifier
+                .width(273.dp)
+                .padding(start = 19.dp),
+                shape = RoundedCornerShape(size = 30.dp),
+                label = { Text(text = stringResource(id = R.string.input_search_label))},
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_search),
+                        contentDescription = "",
+
+                    )
+                }
+            )
+        }
+        Column(
+            modifier = Modifier.padding(start = 19.dp, top = 28.dp),
+        ) {
+                Text(
+                    text = stringResource(id = R.string.home_welcome),
+                    color = Color(156, 156, 156),
+                    fontSize = 24.sp
+                )
+                Text(
+                    text = stringResource(id = R.string.home_description),
+                    color = Color(156, 156, 156),
+                    fontSize = 10.sp
+
+                )
+
+            }
+
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.livro_didatico),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(160.dp)
+                    .fillMaxWidth(),
+            )
+        }
+        Column( modifier = Modifier.padding(top = 46.dp) ) {
+            // fazer fetch aqui ta
+            Text(
+                text = stringResource(id = R.string.home_courses),
+                modifier = Modifier.padding(start = 19.dp),
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(255, 194, 62)
+            )
+            Row( modifier = Modifier
+                .height(1.dp)
+                .fillMaxWidth()
+                .padding(start = 15.dp, end = 24.dp)
+                .background(
+                    color = Color(255, 194, 62)
+                )
+            ) {
+            }
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ){
+                items(listCourse){
+                    Button(
+                        onClick = {
+                            Log.i("ds2t", "onResponse: ${it.sigla}")
+                            siglaDoCurso = it.sigla
+                            queroSigla(siglaDoCurso)
+                            guardarSigla(siglaDoCurso)
+                            openStudends(context)
+                        },
+                        modifier = Modifier
+                            .width(380.dp)
+                            .height(150.dp)
+                            .padding(vertical = 4.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(51, 71, 176))
+
+                        ) {
+                        Row() {
+                            AsyncImage(
+                                model = it.icone, contentDescription = "",
+                                modifier = Modifier.padding(end = 21.dp)
+                            )
+                            Column() {
+                                Text(
+                                    text = it.sigla,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 40.sp
+                                )
+                                Text(
+                                    text = it.nome,
+                                    color = Color.White,
+                                    fontSize = 13.sp
+                                )
+                                Row() {
+                                    Text(
+                                        text = stringResource(id = R.string.charge_courses),
+                                        color = Color.White,
+                                        fontSize = 13.sp
+                                    )
+                                    Text(
+                                        text =  it.carga,
+                                        color = Color.White,
+                                        fontSize = 13.sp
+                                    )
+                                    Text(
+                                        text =  stringResource(id = R.string.hours_courses),
+                                        color = Color.White,
+                                        fontSize = 13.sp
+                                    )
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
+
+fun openStudends(context: Context){
+    val openStuden = Intent(context, StudentsActivity()::class.java)
+    context.startActivity(openStuden)
+}
+
+fun guardarSigla (click: String){
+    var sifla = click
+}
+
 
 @Preview(showBackground = true)
 @Composable
