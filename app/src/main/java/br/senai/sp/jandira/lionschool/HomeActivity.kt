@@ -86,7 +86,7 @@ fun HomeShcool() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 27.dp),
+            .padding(top = 27.dp)
         // horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
@@ -164,9 +164,8 @@ fun HomeShcool() {
                         onClick = {
                             Log.i("ds2t", "onResponse: ${it.sigla}")
                             siglaDoCurso = it.sigla
-                            queroSigla(siglaDoCurso)
-                            guardarSigla(siglaDoCurso)
-                            openStudends(context)
+
+                            openStudends(context, siglaDoCurso)
                         },
                         modifier = Modifier
                             .width(380.dp)
@@ -220,14 +219,13 @@ fun HomeShcool() {
     }
 }
 
-fun openStudends(context: Context){
+fun openStudends(context: Context, siglaDoCurso: String){
     val openStuden = Intent(context, StudentsActivity()::class.java)
+    openStuden.putExtra("sigla", siglaDoCurso.toString())
     context.startActivity(openStuden)
 }
 
-fun guardarSigla (click: String){
-    var sifla = click
-}
+
 
 
 @Preview(showBackground = true)
