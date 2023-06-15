@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -75,7 +76,7 @@ fun HomeLionSchool() {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Lion School",
+                    text = stringResource(id = R.string.title_school),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
@@ -87,7 +88,7 @@ fun HomeLionSchool() {
                     ) {
                     }
                 Text(
-                    text = "Seja bem vindo a maior escola do Brasil com diversos cursos em areas de tecnologia.",
+                    text = stringResource(id = R.string.description_school),
                     modifier = Modifier.padding(end = 65.dp),
                     color = Color(217,217,217),
                     fontSize = 12.sp
@@ -120,7 +121,7 @@ fun HomeLionSchool() {
         )
         {
             Text(
-                text = "Comece a Estudar",
+                text = stringResource(id = R.string.button_start_school),
                 modifier = Modifier.padding(5.dp),
                 color = Color(51, 71, 176)
             )
@@ -154,12 +155,16 @@ fun HomeLionSchool() {
             Image(
                 painter = painterResource(id = R.drawable.facebook),
                 contentDescription = "",
-                modifier = Modifier.padding(end = 31.dp).size(23.dp)
+                modifier = Modifier
+                    .padding(end = 31.dp)
+                    .size(23.dp)
             )
             Image(
                 painter = painterResource(id = R.drawable.instagram),
                 contentDescription = "",
-                modifier = Modifier.padding(end = 31.dp).size(23.dp)
+                modifier = Modifier
+                    .padding(end = 31.dp)
+                    .size(23.dp)
             )
             Image(
                 painter = painterResource(id = R.drawable.twitter),

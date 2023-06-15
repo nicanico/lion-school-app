@@ -101,8 +101,8 @@ fun StudentsLionSchool(sigla: String) {
                     searchState = it
                     Log.i("ds2t", "onResponse: $it")
                 }, modifier = Modifier
-                    .width(273.dp)
-                    .padding(start = 19.dp),
+                    .fillMaxWidth()
+                    .padding(start = 19.dp, end = 19.dp),
                     shape = RoundedCornerShape(size = 30.dp),
                     label = { Text(text = stringResource(id = R.string.input_search_label_student))},
                     leadingIcon = {
@@ -116,7 +116,8 @@ fun StudentsLionSchool(sigla: String) {
 
             Column(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .padding(top = 20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -129,6 +130,7 @@ fun StudentsLionSchool(sigla: String) {
 
                 Text(
                     text = stringResource(id = R.string.title_students),
+                    modifier = Modifier.padding(12.dp),
                     color = Color(255, 194, 62),
                     fontSize = 15.sp
                 )
@@ -145,20 +147,20 @@ fun StudentsLionSchool(sigla: String) {
                             openStudend(context, matricula)
 
                         }, modifier = Modifier
-                            .height(250.dp)
-                            .width(149.dp)
-                            .padding(bottom = 15.dp),
+                            .height(150.dp)
+                            .fillMaxWidth()
+                            .padding(bottom = 15.dp, start = 20.dp, end = 20.dp),
                             colors = ButtonDefaults.buttonColors(backgroundColor = checkStatus(it.status)),
+                            shape = RoundedCornerShape(20.dp),
 
                         ) {
-                            Column(
+                            Row(
                                 modifier = Modifier.fillMaxSize(),
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
                                 AsyncImage(
                                     model = it.foto, contentDescription = "",
-                                    modifier = Modifier.padding(end = 21.dp).height(116.dp).width(117.dp),
+                                    modifier = Modifier.height(116.dp).width(117.dp),
                                     alignment = Alignment.Center,
                                     contentScale = ContentScale.Crop
                                 )
@@ -166,7 +168,7 @@ fun StudentsLionSchool(sigla: String) {
                                     text = it.nome,
                                     color = Color.White,
                                     fontWeight = FontWeight.Bold,
-                                    fontSize = 11.sp,
+                                    fontSize = 21.sp,
                                     textAlign = TextAlign.Center
                                 )
                             }

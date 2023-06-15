@@ -17,6 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -95,8 +96,8 @@ fun HomeShcool() {
                 searchState = it
                 Log.i("ds2t", "onResponse: $it")
             }, modifier = Modifier
-                .width(273.dp)
-                .padding(start = 19.dp),
+                .fillMaxWidth()
+                .padding(start = 19.dp, end = 19.dp ),
                 shape = RoundedCornerShape(size = 30.dp),
                 label = { Text(text = stringResource(id = R.string.input_search_label))},
                 leadingIcon = {
@@ -119,7 +120,7 @@ fun HomeShcool() {
                 Text(
                     text = stringResource(id = R.string.home_description),
                     color = Color(156, 156, 156),
-                    fontSize = 10.sp
+                    fontSize = 15.sp
 
                 )
 
@@ -129,16 +130,11 @@ fun HomeShcool() {
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.livro_didatico),
-                contentDescription = "",
-                modifier = Modifier
-                    .size(160.dp)
-                    .fillMaxWidth(),
-            )
+
         }
-        Column( modifier = Modifier.padding(top = 46.dp) ) {
-            // fazer fetch aqui ta
+        Column(
+            modifier = Modifier.padding(top = 46.dp)
+        ) {
             Text(
                 text = stringResource(id = R.string.home_courses),
                 modifier = Modifier.padding(start = 19.dp),
@@ -156,8 +152,9 @@ fun HomeShcool() {
             ) {
             }
             LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.fillMaxWidth().padding(top = 15.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+
             ){
                 items(listCourse){
                     Button(
@@ -177,7 +174,8 @@ fun HomeShcool() {
                         Row() {
                             AsyncImage(
                                 model = it.icone, contentDescription = "",
-                                modifier = Modifier.padding(end = 21.dp)
+                                modifier = Modifier.padding(end = 21.dp),
+                                colorFilter = ColorFilter.tint(Color.White)
                             )
                             Column() {
                                 Text(

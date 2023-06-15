@@ -18,6 +18,8 @@
     <string name="hours_courses"> Horas</string>
     <string name="title_students">Nossos Alunos:</string>
     <string name="title_activity_student">StudentActivity</string>
+    <string name="date_students">Dados do Aluno:</string>
+    <string name="title_grafic">Disciplinas e Notas:</string>
 
 
 </resources>
